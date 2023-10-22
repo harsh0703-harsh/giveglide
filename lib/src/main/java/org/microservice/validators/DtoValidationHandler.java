@@ -1,5 +1,7 @@
 package org.microservice.validators;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,14 +15,38 @@ public class DtoValidationHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleInvalidArgument(MethodArgumentNotValidException ex){
+    public Map<String, Object> handleInvalidArgument(MethodArgumentNotValidException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("message", "Validation failed");
+        Map<String, String> errors = new HashMap<>();
 
-        Map<String, String> errorMap = new HashMap<>();
+        BindingResult bindingResult = ex.getBindingResult();
 
-        ex.getBindingResult().getFieldErrors().forEach(error->{
-            errorMap.put(error.getField(),error.getDefaultMessage());
+        bindingResult.getFieldErrors().forEach(fieldError -> {
+            errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         });
-        return errorMap;
+
+        response.put("errors", errors);
+
+        return response;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public Map<String, Object> handleNullBody(HttpMessageNotReadableException ex){
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("message", "Validation failed");
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("message" , "All the Requested parameters are null");
+
+        response.put("error",errors);
+
+        return response;
+    }
+
 
 }

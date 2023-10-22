@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-public class UserDto {
+public class RegisterDto {
 
 
     @NotNull(message = "first_name is required")
@@ -28,4 +28,5 @@ public class UserDto {
     @NotNull(message = "password is required")
     @NotEmpty(message = "password is required")
     public String password ;
+
 }
