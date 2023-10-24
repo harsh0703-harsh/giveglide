@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface UserRepository extends MongoRepository<UserModel,String> {
 
     UserModel findByEmail(String email);
+    UserModel findByEmailAndGuestCheckout(String email, Boolean guestCheckout);
+    UserModel findByEmailAndVerificationCode(String email , Integer verificationCode);
 
 }

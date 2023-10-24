@@ -7,10 +7,7 @@ import org.microservice.dto.RegisterDto;
 import org.microservice.models.UserModel;
 import org.microservice.services.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -38,6 +35,12 @@ public class AuthController {
 
         return ResponseEntity.ok(token);
 
+    }
+
+    @GetMapping("/verify/{email}/{code}")
+    public ResponseEntity<?> verify( @PathVariable String email, @PathVariable Integer code){
+        UserModel record = this.authService.verify(email , code);
+        return ResponseEntity.ok(record) ;
     }
 
 }

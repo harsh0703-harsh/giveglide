@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 public class RegisterDto {
 
 
-    @NotNull(message = "first_name is required")
-    @NotEmpty(message = "first_name is required")
-    public String first_name ;
+    @NotNull(message = "firstName is required")
+    @NotEmpty(message = "firstName is required")
+    public String firstName ;
 
-    @NotNull(message = "first_name is required")
-    @NotEmpty(message = "last_name is required")
-    public String last_name ;
+    @NotNull(message = "lastName is required")
+    @NotEmpty(message = "lastName is required")
+    public String lastName ;
 
-    @NotNull(message = "first_name is required")
+    @NotNull(message = "email is required")
     @Email(message = "should be in email format")
     @NotEmpty(message = "email is required")
     public String email ;
