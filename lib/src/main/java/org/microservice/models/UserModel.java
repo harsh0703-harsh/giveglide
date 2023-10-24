@@ -41,7 +41,7 @@ public class UserModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override
@@ -81,6 +81,10 @@ public class UserModel implements UserDetails {
 
     public Role getRole(){
         return role;
+    }
+
+    public String getId(){
+        return _id.toString();
     }
 
 }

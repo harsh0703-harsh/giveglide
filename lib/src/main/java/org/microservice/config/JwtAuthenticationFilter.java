@@ -40,9 +40,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String email;
         final Claims claims;
 
-        System.out.println("The requested parameters");
-        System.out.println(request);
-
         if(authHeader==null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request,response);
             return;
@@ -50,9 +47,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt  = authHeader.substring(7);
         email = jwtService.extractUserEmail(jwt);
         claims = jwtService.extractAllClaims(jwt);
-
-        System.out.println("Here are the claims");
-        System.out.println(claims);
 
         if(email !=null && SecurityContextHolder.getContext().getAuthentication()==null){
 
@@ -70,6 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
+                request.setAttribute("claims",claims);
 
 
             }

@@ -36,9 +36,6 @@ public class AuthController {
 
         String token = this.authService.authenticate(loginDto.email,loginDto.password);
 
-        System.out.println("here i am ");
-        System.out.println(token);
-
         return ResponseEntity.ok(token);
 
     }

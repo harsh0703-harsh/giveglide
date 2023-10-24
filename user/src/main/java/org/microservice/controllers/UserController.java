@@ -1,13 +1,9 @@
 package org.microservice.controllers;
-import jakarta.validation.Valid;
-import org.microservice.dto.LoginDto;
-import org.microservice.dto.UserDto;
-import org.microservice.enums.Role;
-import org.microservice.guards.RoleGuard;
-import org.microservice.models.UserModel;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import org.microservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,9 +17,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RoleGuard({Role.USER,Role.SADMIN})
     @GetMapping("hii")
-    public String sayHi(){
+    @PreAuthorize("hasRole('USER')")
+    public String sayHi(HttpServletRequest request){
+
+        Claims claims = (Claims) request.getAttribute("claims");
+
+        System.out.println(claims);
 
         return "hi to java";
     }
