@@ -2,7 +2,7 @@ package org.microservice.config;
 
 
 import lombok.RequiredArgsConstructor;
-import org.microservice.repository.UserRepository;
+import org.microservice.repository.User.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +24,7 @@ public class ApplicationConfig {
     public UserDetailsService userDetailsService(){
 
      return userRepository::findByEmail;
+
     }
 
 

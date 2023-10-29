@@ -1,5 +1,6 @@
-package org.microservice.repository;
+package org.microservice.repository.User;
 import org.microservice.models.UserModel;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

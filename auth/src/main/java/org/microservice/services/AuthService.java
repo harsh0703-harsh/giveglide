@@ -5,7 +5,7 @@ import org.microservice.config.JwtService;
 import org.microservice.dto.RegisterDto;
 import org.microservice.enums.Role;
 import org.microservice.models.UserModel;
-import org.microservice.repository.UserRepository;
+import org.microservice.repository.User.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
